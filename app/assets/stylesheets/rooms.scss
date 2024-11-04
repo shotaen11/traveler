@@ -1,44 +1,76 @@
 .chat-container {
     width: 100%;
-    max-width: 600px;
+    max-width: 60%;
     margin: 0 auto;
-  }
-  
-  .chat-box {
+}
+
+.cover-room {
+    height: 100%;
+    width: 100%;
+    background-image: url(/assets/index-scaled.jpg);
+    background-color: rgba(255, 255, 255, 0.4);
+    background-blend-mode: lighten;
+    background-size: 100% 100%;
+}
+
+.center-title {
+    text-align: center;
+}
+
+.chat-box {
     max-height: 500px;
     overflow-y: auto;
     border: 1px solid #e0e0e0;
-    border-radius: 5px;
+    border-radius: 10px;
     padding: 10px;
     background-color: #f9f9f9;
-  }
-  
-  .chat-message {
-    display: flex;
+}
+
+.chat-message {
+    display: flex; /* フレックスボックスを使用して並びを調整 */
+    align-items: flex-start; /* 吹き出しと画像を揃える */
     margin-bottom: 10px;
-  }
-  
-  .my-message {
-    justify-content: flex-end;
-  }
-  
-  .other-message {
-    justify-content: flex-start;
-  }
-  
-  .chat-face {
-    margin-right: 10px;
-  }
-  
-  .chat-content {
-    background-color: #ffffff;
-    border-radius: 5px;
-    padding: 10px;
-    max-width: 80%;
-  }
-  
-  .chat-time {
-    font-size: 12px;
-    color: #888;
-  }
-  
+}
+
+.my-message {
+    justify-content: flex-end; /* 自分のメッセージを右側に寄せる */
+}
+
+.other-message {
+    justify-content: flex-start; /* 他人のメッセージを左側に寄せる */
+}
+
+.chat-face {
+    margin-left: 10px; /* メッセージとの間にマージンを追加 */
+}
+
+.chat-content {
+    background-color: #ffffff; /* 吹き出しの背景色 */
+    border-radius: 10px; /* 吹き出しの角を全て丸める */
+    padding: 10px; /* 吹き出し内のパディング */
+    max-width: 80%; /* 吹き出しの最大幅を指定 */
+    position: relative; /* 吹き出しの位置を相対的にする */
+}
+
+.my-message .chat-content {
+    background-color: #d1e7dd; /* 自分のメッセージの背景色 */
+}
+
+.other-message .chat-content {
+    background-color: #f8d7da; /* 相手のメッセージの背景色 */
+    margin-left: 10px;
+}
+
+.chat-time {
+    font-size: 10px; /* フォントサイズを小 */
+    color: rgba(0, 0, 0, 0.5); /* 半透明の黒 */
+    margin-top: 5px; /* メッセージとの間にマージンを追加 */
+    display: block; /* 新しい行で表示するためにブロック要素にする */
+    text-align: right; /* 時間を右揃え */
+}
+
+.message-form {
+    display: flex; /* フレックスボックスで中央揃え */
+    justify-content: center; /* 中央揃え */
+    margin-top: 30px;
+}
