@@ -25,4 +25,8 @@ Rails.application.routes.draw do
     end
     resource :relationships, only: [:create, :destroy]
   end
+
+  resources :rooms, only: [:create, :show] do
+    resources :messages, only: [:create] # ここでmessagesリソースをネスト
+  end
 end

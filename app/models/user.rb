@@ -12,6 +12,9 @@ class User < ApplicationRecord
   has_many :following_user, through: :follower, source: :followed
   has_many :follower_user, through: :followed, source: :follower
   has_many :read_counts, dependent: :destroy
+  has_many :messages, dependent: :destroy
+  has_many :entries, dependent: :destroy
+
   attachment :profile_image
   validates :name, presence: true
 
@@ -30,4 +33,19 @@ class User < ApplicationRecord
     following_user.include?(user)
   end  
 
+    # 自分が特定のユーザーにフォローされているか確認
+  def followed_by?(user)
+    follower_user.include?(user)
+  end
+
+  def avatar
+    if profile_image.present? && profile_image_attacher.present? && profile_image_attacher.file.present?
+      puts "Profile image URL: #{profile_image_attacher.url}"  # デバッグ用
+      profile_image_attacher.url
+    else
+      puts "No profile image found, using default."  # デバッグ用
+      "no_image.svg" # デフォルトの画像パスを指定
+    end
+  end
+  
 end
