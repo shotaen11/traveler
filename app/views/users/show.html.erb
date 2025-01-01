@@ -7,21 +7,22 @@
       <h1 class="font-weight-normal"><%= @user.name %>さんのページ</h1>
       <% end %>
     </div>
-    <% unless @user.id == current_user.id %>
-     <% if (current_user.followed_by? @user) && (@user.followed_by? current_user)  %>
-     <% if @isRoom == true %>
-      <p class="user-show-room"><a href="/rooms/<%= @roomId %>" class="btn btn-primary btn-lg">チャットへ</a>
-     <% else %>
-      <%= form_for @room do |f| %>
-        <%= fields_for @entry do |e| %>
-          <%= e.hidden_field :user_id, value: @user.id %>
-        <% end %>
-        <%= f.submit "チャットを始める", class:"btn btn-primary btn-lg user-show-chat"%>
-      <% end %>
-     <% end %>
-     <% end %>
-    <% end %>
+    <% unless @user.id == current_user.id %> <!-- 現在のユーザーが相手ユーザーでない場合に処理を実行 -->
+    <% if (current_user.followed_by? @user) && (@user.followed_by? current_user) %> <!-- 現在のユーザーが相手をフォローしていて、相手も現在のユーザーをフォローしている場合 -->
       
+      <% if @isRoom == true %> <!-- 既にルームが存在する場合 -->
+        <p class="user-show-room"><a href="/rooms/<%= @roomId %>" class="btn btn-primary btn-lg">チャットへ</a> <!-- チャットルームへのリンクを表示 -->
+      <% else %> <!-- ルームが存在しない場合 -->
+        <%= form_for @room do |f| %> <!-- 新しいチャットルームを作成するためのフォーム -->
+          <%= fields_for @entry do |e| %> <!-- エントリー用のフィールドを作成 -->
+            <%= e.hidden_field :user_id, value: @user.id %> <!-- 相手ユーザーのIDを隠しフィールドに設定 -->
+          <% end %>
+          <%= f.submit "チャットを始める", class:"btn btn-primary btn-lg user-show-chat" %> <!-- チャットを開始するための送信ボタン -->
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+  
     <% if user_signed_in? && @user == current_user %>
     <p class="d-flex align-self-end">
       <%= link_to "プロフィール編集", edit_user_path(@user), class: "btn btn-success" %>
